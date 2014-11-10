@@ -1,0 +1,5 @@
+      REAL FUNCTION POWR(X)
+      COMMON/PAWPAR/PAR(2)
+      POWR=PAR(1)*(X**PAR(2))
+      END
+

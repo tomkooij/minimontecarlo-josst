@@ -1,0 +1,58 @@
+DEST     = 	$(HOME)/LIB
+
+LIBRAN   = 	libran.a
+
+INCLUDES = 	
+
+CFLAGS   = 	$(INCLUDES)
+
+HEADERS  =	libran.h
+
+SRCS     =	ranexp.c \
+		rangauss.c \
+		ranset.c \
+		random.c \
+		randival.c \
+		rndnmbr.c \
+		init.c
+ 
+OBJS     =	ranexp.o \
+		rangauss.o \
+		ranset.o \
+		random.o \
+		randival.o \
+		rndnmbr.o \
+		init.o
+
+$(LIBRAN):	$(OBJS)
+		ar rv $(LIBRAN) $(OBJS)
+		ranlib $(LIBRAN)
+
+depend:		$(SRCS)
+		makedepend $(INCLUDES) $(SRCS)
+
+install:	$(LIBRAN)
+		cp $(LIBRAN) $(DEST)/$(LIBRAN)
+		cp libran.h $(HOME)/INCLUDE/libran.h
+clean::
+		/bin/rm $(OBJS) $(LIBRAN)
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+
+ranexp.o: /usr/include/math.h /usr/include/features.h
+ranexp.o: /usr/include/sys/cdefs.h /usr/include/huge_val.h
+ranexp.o: /usr/include/endian.h /usr/include/bytesex.h /usr/include/nan.h
+ranexp.o: /usr/lib/gcc-lib/i486-linux/2.7.2.1/include/float.h
+ranexp.o: /usr/include/values.h /usr/include/ieee754.h /usr/include/ieee854.h
+ranexp.o: libran.h
+rangauss.o: libran.h
+ranset.o: libran.h
+random.o: /usr/include/time.h /usr/include/features.h
+random.o: /usr/include/sys/cdefs.h /usr/include/sys/time.h
+random.o: /usr/include/linux/types.h /usr/include/linux/posix_types.h
+random.o: /usr/include/asm/posix_types.h /usr/include/asm/types.h
+random.o: /usr/include/linux/time.h /usr/include/sys/types.h
+random.o: /usr/include/sys/bitypes.h libran.h
+randival.o: libran.h
+rndnmbr.o: libran.h
+init.o: libran.h
