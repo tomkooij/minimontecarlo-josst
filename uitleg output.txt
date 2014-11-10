@@ -1,0 +1,64 @@
+example output:
+
+    #1 5972638.576 17.545 54.681 5048205.401 5.653 46.642
+    #1 7681095.551 18.308 54.681 1605359.027 14.141 1.797
+    #1 13387931.035 20.165 54.681 16838805.290 4.504 11.895
+    #1 194323.798 10.516 54.681 209226.915 5.779 112.069
+    #1 3290.489 6.673 54.681 6006.965 5.571 5.356
+    #1 13219671.551 20.120 54.681 48484258.359 9.529 9.922
+    #1 92448.001 9.558 54.681 73368.663 0.882 30.265
+    + 1 0.420386 0.882302 0.053201
+    #1 59882.051 9.061 54.681 97665.791 8.154 25.216
+    0.420386 1 0.882302 0.053201
+    #1 6748.003 7.134 54.681 12406.712 3.345 23.447
+    #1 4759.075 6.900 54.681 706.737 7.293 119.751
+
+Er zijn 3 types output:
+
+(1) voor elke interactie:
+#1 5972638.576 17.545 54.681 5048205.401 5.653 46.642
+bron: next_interaction.c:
+printf( "#%d %.3f %.3f %.3f %.3f %.3f %.3f\n" , m , y[0] , y[1] , y[2] , x[0] , x[1] , x[2] );
+
+    m : mechanisme (photo electric 0, compton 1, pair creation 2)
+    x = vrije weglengte, y = random getal uit exponentiele verdeling rondom
+        de vrije weglengte.
+    x[0], y[0] : photo electric
+    x[1], y[1] : compton
+    x[2], y[2] : pair creation
+
+
+(2) als er nieuwe deeltjes (electronen) aan de simulatie worden toegevoegd:
++ 1 0.420386 0.882302 0.053201
+
+process_photon.c:printf("+%2d %8.6f %8.6f %8.6f\n",PHOTO_ELECTRIC,Egam,xi,Egam);
+process_photon.c:printf("+%2d %8.6f %8.6f %8.6f\n",PAIR_CREATION,Egam,xi,2*T);
+process_photon.c:printf("+%2d %8.6f %8.6f %8.6f\n",PAIR_CREATION,Egam,xi,3*T);
+process_photon.c:printf("+%2d %8.6f %8.6f %8.6f\n",COMPTON,Egam,xi,Eelec);
+
+(3) energie afgifte aan detector "aan het eind" van de simulatie (per invallend deeltje)
+0.420386 1 0.882302 0.053201
+
+main.c:			printf( "%f %d %f %f\n" , Eprim , mech , x , Eloss );
+
+Eprim = primaire energie
+mech = mechanisme
+x = "diepte" (x-coordinaat)
+Eloss = afgegeven energie    
+
+
+
+
+/* Mechanisms */
+#define		NMECHANISMS	3
+#define		NO_INTERACTION	NMECHANISMS
+#define		NOT_DEFINED	-1
+#define		PHOTO_ELECTRIC	0
+#define		COMPTON		1
+#define		PAIR_CREATION	2
+
+/* particles */
+#define		NPARTICLES	20
+#define		PHOTON		0
+#define		ELECTRON	1
+#define		POSITRON	1
