@@ -25,6 +25,11 @@ double	T, Egam;	{
 	if( T > edge )
    		return 0.0;
 
+	/* Leo, 1987, page 54, eq.210
+		 dsigma/dT for compton scattering
+		 (TK)
+	*/
+
 	kinfac = M_PI * (re * re) / Me / (gam * gam);
 
 	s = T / Egam;
@@ -34,6 +39,6 @@ double	T, Egam;	{
 
 	sigma = kinfac * (2.0 + C + D);
 
-	return sigma;
+	return sigma; /* actually dsigma/dT (TK) */
 
 }

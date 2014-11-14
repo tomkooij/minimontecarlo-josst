@@ -27,6 +27,11 @@ double	Egam;	{
 
 /*	All energies in MeV; distances in cm	*/
 
+
+	/* Ref: Leo, 1987
+			chap 2.7, p. 52
+			*/
+
 	Me     = 0.510998902;
 	re     = 2.817940285e-13;
 	kinfac = 2.0 * M_PI * (re * re);
