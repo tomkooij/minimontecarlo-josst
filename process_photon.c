@@ -60,6 +60,12 @@ printf("+%2d %8.6f %8.6f %8.6f\n",PAIR_CREATION,Egam,xi,3*T);
 
 }
 
+/*
+  Ref: Leo, Techniques for nuclear and particle physics, Springer, 1987
+		par 2.7, p. 52.
+  (TK)
+*/
+
 int do_compton( Egam , xi )
 double	Egam, xi;	{
 
@@ -79,6 +85,13 @@ double	Egam, xi;	{
 		edge  = get_edge();
 		ptr   = cumul_ec[step];
 		Tstep = edge / NCHAN;
+
+/*
+Integrate dsigma/dT to calcualate cross section for T
+TODO: figure out what this does! (TK)
+*/
+
+
 /* dsigma/dT */
 		for( i=0; i<NCHAN; i++ )	{
 			T      = (Tstep - 1.0e-3) + i * Tstep;
