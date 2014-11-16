@@ -1,3 +1,8 @@
+#
+# Makefile tested on Cygwin-x64 (Windows 7 laptop) 
+#    and RedHat Linux 2.6 (tevere.nikef.nl)
+#
+
 # CFLAGS =	-g -I. -I/home/josst/SOURCES/LIBRAN/
 #CFLAGS =	-g -I. -I/localstore/hermes/josst/LIBRAN
 CFLAGS = -g -I.
@@ -15,7 +20,7 @@ SRCS =		main.c \
 OBJS =		$(SRCS:.c=.o)
 
 # LIBS =		/home/josst/SOURCES/LIBRAN/libran.a
-LIBS =		libran.a
+LIBS =		LIBRAN/libran.a
 
 PROGRAM =	a.out
 
@@ -25,7 +30,6 @@ $(PROGRAM):	$(OBJS)
 depend:		$(SRCS)
 		makedepend $(CFLAGS) $(SRCS)
 
-clean:		
+clean:
 		/bin/rm $(OBJS)
 # DO NOT DELETE
-
