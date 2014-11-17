@@ -133,7 +133,7 @@ Integrate dsigma/dT to calcualate cross section for T
 
 
 	/* this is output which is analysed by Python code (TK)*/
-  printf("TK %d %d %8.6f\n", chan, NCHAN, edge);
+  printf("TK %d %d %8.6f %8.6f %8.6f\n", chan, NCHAN, edge, Egam, Eelec);
 
 	put_particle( ELECTRON , Eelec , xi );
 	printf("+%2d %8.6f %8.6f %8.6f\n",COMPTON,Egam,xi,Eelec);
