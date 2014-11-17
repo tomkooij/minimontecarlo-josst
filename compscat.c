@@ -1,11 +1,12 @@
 /*
 Not used! (TK)
-/*
+*/
 
 #include	<stdio.h>
 #include	<math.h>
 
 #define		ELECTR_DENS	(3.37e23)	/* scintillator material */
+#define		M_PI	(3.1415926)
 
 /*	switch opt
 	opt=0	function calculates cross-section for Compton scattering

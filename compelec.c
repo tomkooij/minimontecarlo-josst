@@ -1,6 +1,8 @@
 #include	<stdio.h>
 #include	<math.h>
 
+#define M_PI  3.1415926
+
 static double	edge;
 
 double get_edge()	{
