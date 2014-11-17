@@ -75,20 +75,27 @@ double	Egam, xi;	{
 
 	step = (Egam - EMIN) / Estep;
 
+	/*
+	 cumel_ec[] = static!
+	 If it is not initialised yet, initialise it!
+	*/
+
 	if( cumul_ec[step] == NULL )	{
 		cumul_ec[step] = (double *)malloc( NCHAN * sizeof(double) );
 		if( cumul_ec[step] == NULL )	{
 			fprintf( stderr , "Error do_compton: not enough memory\n" );
 			exit( -1 );
 		}
+
+		/* the compton edge is calculated in compelec() and is static */
 		compelec( 1.e-3 , Egam );	/* dummy call to make sure edge is up-to-date */
-		edge  = get_edge();
+		edge  = get_edge(); /* this is just return edge */
+
 		ptr   = cumul_ec[step];
 		Tstep = edge / NCHAN;
 
 /*
 Integrate dsigma/dT to calcualate cross section for T
-TODO: figure out what this does! (TK)
 */
 
 
@@ -105,9 +112,14 @@ TODO: figure out what this does! (TK)
 			ptr[i] = ptr[i] / ptr[NCHAN-1];
 	}
 
-	ptr = cumul_ec[step];
-	rnd = random_number();
+	/* cumul_ec is already initialised (dsigma/dT is integrated) */
 
+  /* Get a random number from the Energy distribution */
+
+	ptr = cumul_ec[step];
+	rnd = random_number(); /* from 0 to 1 */
+
+	/* select channel */
 	for( i=0; i<NCHAN; i++ )	{
 		if( ptr[i] >= rnd )	{
 			chan = i;
@@ -119,8 +131,11 @@ TODO: figure out what this does! (TK)
 	edge  = get_edge();
 	Eelec = (((double)chan + random_number()) / (double)NCHAN) * edge;
 
+	/* this is output which is analyse by Python code (TK)*/
+  printf("TK %8.f %8.f %8.f", chan, NCHAN, edge)
+
 	put_particle( ELECTRON , Eelec , xi );
-printf("+%2d %8.6f %8.6f %8.6f\n",COMPTON,Egam,xi,Eelec);
+	printf("+%2d %8.6f %8.6f %8.6f\n",COMPTON,Egam,xi,Eelec);
 	put_particle( PHOTON , Egam-Eelec , xi );
 
 	return 2;

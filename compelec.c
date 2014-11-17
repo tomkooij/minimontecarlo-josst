@@ -25,7 +25,8 @@ double	T, Egam;	{
 	if( T > edge )
    		return 0.0;
 
-	/* Leo, 1987, page 54, eq.210
+	/*
+		 W.R. Leo, 1987, page 54, eq.209
 		 dsigma/dT for compton scattering
 		 (TK)
 	*/
