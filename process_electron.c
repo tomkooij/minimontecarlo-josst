@@ -24,7 +24,7 @@ double	T, xi;	{
 		printf("T 0 %8.6f %8.6f Electron left the detector!\n", (x*LOSS), T);
 		return (x * LOSS);
 	} else {
-		printf("T 1 %8.6f Electron was absorbed by the detector!\n", T);
+		printf("T 1 %8.6f %8.6f Electron was absorbed by the detector!\n", (x*LOSS), T);
 		return T;
 	}
 }
